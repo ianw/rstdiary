@@ -27,16 +27,17 @@ all_months = set()
 # to build the pages
 all_entries = defaultdict(list)
 
+
 class Entry():
 
     def __init__(self, date, body):
         self.date = date
         self.body = body
         # mangle the header to be a bit more readable
-        self.body=re.sub(r"<h1>.*</h1>",
-                         r"<h2>%s <small>%s</small></h2> " %
-                         (date.strftime("%d %B"),
-                          date.strftime("%A")), body)
+        self.body = re.sub(r"<h1>.*</h1>",
+                           r"<h2>%s <small>%s</small></h2> " %
+                           (date.strftime("%d %B"),
+                            date.strftime("%A")), body)
         self.month = "%4d-%02d" % (date.year,
                                    date.month)
         # set to 0 if this is an entry for a monday
@@ -61,7 +62,7 @@ def parse_entries(input_file):
     settings = OptionParser(
         components=(Parser,
                     docutils.writers.html4css1.Writer)).get_default_values()
-    docroot = docutils.utils.new_document(file.name,settings)
+    docroot = docutils.utils.new_document(file.name, settings)
     parser.parse(text, docroot)
 
     for i in docroot.traverse(condition=docutils.nodes.section):
@@ -69,7 +70,7 @@ def parse_entries(input_file):
             date_string = re.findall(r'(\d{4}-\d{1,2}-\d{1,2})',
                                      str(i.children[0]))[0]
             logging.debug("Found entry : %s" % date_string)
-            date=datetime.datetime.strptime(date_string, "%Y-%m-%d")
+            date = datetime.datetime.strptime(date_string, "%Y-%m-%d")
         except IndexError:
             sys.stderr.write("can not parse section : %s\n" %
                              str(i.children[0]))
@@ -86,8 +87,8 @@ def parse_entries(input_file):
 
     all_months = sorted(all_months, reverse=True)
 
-def write_html(config):
 
+def write_html(config):
     env = Environment(loader=PackageLoader('rstdiary', 'templates'))
     template = env.get_template('page.html')
 
@@ -120,8 +121,8 @@ def write_html(config):
 
 
 def main():
-
-    parser = argparse.ArgumentParser(description="Generate a simple HTML diary")
+    parser = argparse.ArgumentParser(
+        description="Generate a simple HTML diary")
     parser.add_argument('-c', '--config', help="Path to config file",
                         required=True)
     parser.add_argument('-d', '--debug', action='store_true')

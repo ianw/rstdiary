@@ -32,14 +32,17 @@ class Entry():
     def __init__(self, date, body):
         self.date = date
         self.body = body
-
         # mangle the header to be a bit more readable
         self.body=re.sub(r"<h1>.*</h1>",
                          r"<h2>%s <small>%s</small></h2> " %
-                         (date.strftime("%Y-%m-%d"),
+                         (date.strftime("%d %B"),
                           date.strftime("%A")), body)
         self.month = "%4d-%02d" % (date.year,
                                    date.month)
+        # set to 0 if this is an entry for a monday
+        self.start_of_week = True if self.date.weekday() == 0 else False
+        # used to set a <a> anchor for each entry
+        self.anchor = "%4d-%02d-%02d" % (date.year, date.month, date.day)
 
     def __repr__(self):
         return str(self.date)
@@ -83,7 +86,6 @@ def parse_entries(input_file):
 
     all_months = sorted(all_months, reverse=True)
 
-
 def write_html(config):
 
     env = Environment(loader=PackageLoader('rstdiary', 'templates'))
@@ -106,11 +108,11 @@ def write_html(config):
                                  all_months=all_months,
                                  month_entries=month_entries)
 
+        filename = os.path.join(output_dir, '%s.html' % month)
+
         if first:
-            filename = os.path.join(output_dir,"index.html")
+            os.symlink(filename, os.path.join(output_dir, "index.html"))
             first = False
-        else:
-            filename = os.path.join(output_dir, '%s.html' % month)
 
         logging.debug("Writing %s" % filename)
         with open(filename, 'w') as f:

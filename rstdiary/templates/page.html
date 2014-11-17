@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Blog Template for Bootstrap</title>
+    <title>{{ title }}</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -32,7 +32,6 @@
  */
 
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
   color: #555;
   padding-top: 70px;
 }
@@ -44,7 +43,6 @@ h4, .h4,
 h5, .h5,
 h6, .h6 {
   margin-top: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #333;
 }
@@ -58,69 +56,6 @@ h6, .h6 {
   .container {
     width: 970px;
   }
-}
-
-
-/*
- * Masthead for nav
- */
-
-.blog-masthead {
-  background-color: #428bca;
-  -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
-          box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
-}
-
-/* Nav links */
-.blog-nav-item {
-  position: relative;
-  display: inline-block;
-  padding: 10px;
-  font-weight: 500;
-  color: #cdddeb;
-}
-.blog-nav-item:hover,
-.blog-nav-item:focus {
-  color: #fff;
-  text-decoration: none;
-}
-
-/* Active state gets a caret at the bottom */
-.blog-nav .active {
-  color: #fff;
-}
-.blog-nav .active:after {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 0;
-  margin-left: -5px;
-  vertical-align: middle;
-  content: " ";
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid;
-  border-left: 5px solid transparent;
-}
-
-
-/*
- * Blog name and description
- */
-
-.blog-header {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-.blog-title {
-  margin-top: 30px;
-  margin-bottom: 0;
-  font-size: 60px;
-  font-weight: normal;
-}
-.blog-description {
-  font-size: 20px;
-  color: #999;
 }
 
 
@@ -149,34 +84,12 @@ h6, .h6 {
   margin-bottom: 0;
 }
 
-
-/* Pagination */
-.pager {
-  margin-bottom: 60px;
-  text-align: left;
-}
-.pager > li > a {
-  width: 140px;
-  padding: 10px 20px;
-  text-align: center;
-  border-radius: 30px;
-}
-
-
 /*
  * Blog posts
  */
 
 .blog-post {
-  margin-bottom: 60px;
-}
-.blog-post-title {
-  margin-bottom: 5px;
-  font-size: 40px;
-}
-.blog-post-meta {
-  margin-bottom: 20px;
-  color: #999;
+  margin-bottom: 10px;
 }
 
 
@@ -198,7 +111,7 @@ h6, .h6 {
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">{{ title }}</a>
@@ -219,8 +132,17 @@ h6, .h6 {
 
 
           {% for entry in month_entries %}
-          <div class="blog-post">
-            <p>{{ entry.body|safe }}</p>
+          <div class="blog-post" style=
+             {% if entry.start_of_week %}
+               "border-bottom: 2px solid;"
+             {% else %}
+               "border-bottom: 1px dashed #e5e5e5;"
+             {% endif %}>
+            <a name="{{entry.anchor}}"></a>
+            <a href="#{{entry.anchor}}">
+             <span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float:right"></span>
+            </a>
+            {{ entry.body|safe }}
           </div><!-- /.blog-post -->
           {% endfor %}
 
@@ -229,8 +151,20 @@ h6, .h6 {
         <div class="col-sm-3 col-sm-offset-1">
           <div class="sidebar-module sidebar-module-inset">
             <h4>About</h4>
-            <p>{{ about }}</p>
+            <p>{{ about|safe }}</p>
           </div>
+
+          <div class="sidebar-module">
+            <h4>Weeks</h4>
+            <ol class="list-unstyled">
+              {% for entry in month_entries %}
+                {% if entry.start_of_week %}
+              <li><a href="#{{ entry.anchor }}">{{ entry.anchor }}</a></li>
+                {% endif %}
+              {% endfor %}
+            </ol>
+          </div>
+
           <div class="sidebar-module">
             <h4>Archives</h4>
             <ol class="list-unstyled">
@@ -247,7 +181,7 @@ h6, .h6 {
 
     <footer class="blog-footer">
       <p>
-        <a href="#">Back to top</a>
+        <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <a href="#">top</a>
       </p>
     </footer>
 

@@ -1,6 +1,6 @@
 %global pypiname rstdiary
 Name:           python-rstdiary
-Version:        0.1
+Version:        0.2
 Release:        1%{?dist}
 Summary:        Create a simple HTML diary from an RST input file
 
@@ -40,5 +40,8 @@ The output is chunked into months and lightly styled with bootstrap.
 /usr/bin/rstdiary
 
 %changelog
-* Tue Nov 18 2014 Ian Wienand <iwienand@redhat.com> - 0.1-1
+* Tue Nov 18 2014 Ian Wienand <ian@wienand.org> - 0.2-1
+- 0.2 release
+
+* Tue Nov 18 2014 Ian Wienand <ian@wienand.org> - 0.1-1
 - Initial release

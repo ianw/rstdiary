@@ -112,7 +112,8 @@ def write_html(config):
         filename = os.path.join(output_dir, '%s.html' % month)
 
         if first:
-            os.symlink(filename, os.path.join(output_dir, "index.html"))
+            os.symlink('%s.html' % month,
+                       os.path.join(output_dir, 'index.html'))
             first = False
 
         logging.debug("Writing %s" % filename)

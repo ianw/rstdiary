@@ -19,7 +19,8 @@ import logging
 import ConfigParser
 
 import re
-import datetime
+
+from datetime import datetime
 
 all_months = set()
 # a dict that keeps entries keyed by month.
@@ -35,8 +36,8 @@ class Entry():
         self.body = body
         # mangle the header to be a bit more readable
         self.body = re.sub(r"<h1>.*</h1>",
-                           r"<h2>%s <small>%s</small></h2> " %
-                           (date.strftime("%d %B"),
+                           r'<h2>%s <small>%s</small></h2>' %
+                           (date.strftime("%d"),
                             date.strftime("%A")), body)
         self.month = "%4d-%02d" % (date.year,
                                    date.month)
@@ -70,7 +71,7 @@ def parse_entries(input_file):
             date_string = re.findall(r'(\d{4}-\d{1,2}-\d{1,2})',
                                      str(i.children[0]))[0]
             logging.debug("Found entry : %s" % date_string)
-            date = datetime.datetime.strptime(date_string, "%Y-%m-%d")
+            date = datetime.strptime(date_string, "%Y-%m-%d")
         except IndexError:
             sys.stderr.write("can not parse section : %s\n" %
                              str(i.children[0]))
@@ -104,8 +105,11 @@ def write_html(config):
         month_entries = all_entries[month]
         month_entries.sort(key=lambda e: e.date, reverse=True)
 
+        string_month = datetime.strptime(month, "%Y-%m").strftime("%B %Y")
+
         output = template.render(title=config.get('rstdiary', 'title'),
                                  about=config.get('rstdiary', 'about'),
+                                 month=string_month,
                                  all_months=all_months,
                                  month_entries=month_entries)
 

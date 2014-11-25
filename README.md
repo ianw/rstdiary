@@ -45,6 +45,14 @@ title = Worklog of Me
 about = <a href="mailto:me@company.com">me@company.com</a>
 ```
 
+All of the above options should be filled out
+
 ## output
 
-`rstdiary` outputs one HTML page for each month of entries into `output_dir`.  `index.html` is symlinked to the most recent month.
+`rstdiary` outputs one HTML page for each month of entries into
+`output_dir`.  `index.html` is symlinked to the most recent month.
+
+The output is lightly styled and uses CDN versions of some common
+utilities such as bootstrap.
+
+A sample output is [here](https://rawgit.com/ianw/rstdiary/master/sample/index.html)

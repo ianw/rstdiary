@@ -16,6 +16,8 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
@@ -24,7 +26,8 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
   <style>
 /*
@@ -32,8 +35,9 @@
  */
 
 body {
-  color: #555;
+  color: #222;
   padding-top: 70px;
+  font-family: 'Roboto', san-serif;
 }
 
 h1, .h1,
@@ -92,6 +96,16 @@ h6, .h6 {
   margin-bottom: 10px;
 }
 
+.blog-post h2 {
+  padding: 5px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #aaa;
+}
+
+.blog-first h2 {
+  background: #e3f2fd;
+  border-bottom: 1px solid #42a5f5;
+}
 
 /*
  * Footer
@@ -109,36 +123,30 @@ h6, .h6 {
 }
 </style>
 
+  </head>
+
   <body>
 
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">{{ title }}</a>
+          <a class="navbar-brand" href="index.html">{{ title }}</a>
         </div>
       </div>
     </div>
 
     <div class="container">
 
-      <!--
-      <h1 class="blog-title">{{ title }}</h1>
-      <p class="lead">{{ description }}</p>
-      -->
+      <h1>{{ month }}</h1>
 
       <div class="row">
-
         <div class="col-sm-8 blog-main">
-
-
           {% for entry in month_entries %}
-          <div class="blog-post" style=
+          <div class="blog-post
              {% if entry.start_of_week %}
-               "border-bottom: 2px solid;"
-             {% else %}
-               "border-bottom: 1px dashed #e5e5e5;"
-             {% endif %}>
-            <a name="{{entry.anchor}}"></a>
+             blog-first
+             {% endif %}"
+               id="{{entry.anchor}}">
             <a href="#{{entry.anchor}}">
              <span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float:right"></span>
             </a>
@@ -165,14 +173,17 @@ h6, .h6 {
             </ol>
           </div>
 
-          <div class="sidebar-module">
-            <h4>Archives</h4>
-            <ol class="list-unstyled">
-              {% for item in all_months %}
-              <li><a href="{{ item }}.html">{{item}}</a></li>
-              {% endfor %}
-            </ol>
+          <div class="sidebar-module ">
+            <h4><a href="#" data-toggle="collapse" data-target="#archives" style="color:#333">Archives &raquo;</a></h4>
+            <div id="archives" class="collapse">
+              <ol class="list-unstyled">
+                {% for item in all_months %}
+                <li><a href="{{ item }}.html">{{item}}</a></li>
+                {% endfor %}
+              </ol>
+            </div>
           </div>
+
         </div>
 
       </div><!-- /.row -->
@@ -185,14 +196,5 @@ h6, .h6 {
       </p>
     </footer>
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/docs.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

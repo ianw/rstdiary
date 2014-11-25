@@ -17,6 +17,9 @@ foobobnicator
 Created git repos for new exciting project
 
 * `<http://my-git.repo/project.git>`_
+* testing
+
+  * nesting
 
 Started work on initial templates
 
@@ -28,8 +31,10 @@ Today I worked on a very exciting project
 I met with Jim and Sally about starting this project, which will be
 very exiciting for all involved.  We decided
 
-* moo
-* bar
+#. moo
+#. bar
+
+   #. bar-foo
 
 2014-11-12
 ==========
@@ -50,30 +55,29 @@ lacus, eget consequat ex sodales id.
 
 **First day**
 
-Quisque eu commodo velit, egestas malesuada leo. Etiam laoreet
-vestibulum felis id aliquam. Proin commodo dictum mauris non
-tincidunt. Ut interdum vehicula tellus vitae sollicitudin.
+Since this is Monday, it gets a different colour
 
 2014-10-10
 ==========
 
-fff
+Test old entires
 
 2014-01-4
 =========
 
-asfd
+Test out-of-order
+
 
 2014-1-3
 ========
 
-asfd
+Test missing leading zeros
 
 
 2013-11-14
 ==========
 
-how are you
+Test an old year
 
 * foo `ian <http://foo.com>`_
 

@@ -1,6 +1,6 @@
 %global pypiname rstdiary
 Name:           python-rstdiary
-Version:        0.2
+Version:        0.3
 Release:        1%{?dist}
 Summary:        Create a simple HTML diary from an RST input file
 

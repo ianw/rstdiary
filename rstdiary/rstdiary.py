@@ -116,6 +116,11 @@ def write_html(config):
         filename = os.path.join(output_dir, '%s.html' % month)
 
         if first:
+            index_html = os.path.join(output_dir, 'index.html')
+            if os.path.exists(index_html):
+                # everything overwrites by design
+                logging.debug("Removing existing index.html")
+                os.unlink(index_html)
             os.symlink('%s.html' % month,
                        os.path.join(output_dir, 'index.html'))
             first = False

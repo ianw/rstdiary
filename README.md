@@ -42,7 +42,9 @@ Created git repos for new exciting project
 input = example.rst
 output_dir = /tmp
 title = Worklog of Me
+author_name = My Name
 about = <a href="mailto:me@company.com">me@company.com</a>
+site_root = http://foo.com/diary/
 ```
 
 All of the above options should be filled out
@@ -54,5 +56,8 @@ All of the above options should be filled out
 
 The output is lightly styled and uses CDN versions of some common
 utilities such as bootstrap.
+
+An atom feed of the entries for the latest month only is generated in
+atom.xml
 
 A sample output is [here](https://rawgit.com/ianw/rstdiary/master/sample/index.html)

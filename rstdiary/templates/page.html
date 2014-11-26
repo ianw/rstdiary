@@ -136,7 +136,7 @@ h6, .h6 {
             <a href="#{{entry.anchor}}">
              <span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float:right"></span>
             </a>
-            {{ entry.body|safe }}
+            {{ entry.body_html|safe }}
           </div><!-- /.blog-post -->
           {% endfor %}
 

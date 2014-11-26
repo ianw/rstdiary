@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+    <title>{{ title }}</title>
+    <updated>{{ updated }}</updated>
+    <link href="{{ site_root + "atom.xml" }}" rel="self" />
+    <link href="{{ site_root }}" />
+    <id>{{ site_root }}</id>
+
+    {% for entry in month_entries %}
+    <entry>
+        <title>{{ entry.anchor }}</title>
+        <id>{{ site_root + month + ".html#" + entry.anchor }}</id>
+        <updated>{{ entry.date.isoformat('T')+"Z" }}</updated>
+        <content type='html'>{{ entry.body|e }}</content>
+        <author>
+          <name>{{ author_name }}</name>
+        </author>
+    </entry>
+    {% endfor %}
+
+</feed>

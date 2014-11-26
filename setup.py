@@ -9,12 +9,12 @@ The output is chunked into months and lightly styled with bootstrap.
 
 setup(
     name='rstdiary',
-    version='0.4',
+    version='0.5',
     author='Ian Wienand',
     author_email='ian@wienand.org',
     packages=find_packages(),
     package_data={
-        '': ['templates/*.html'],
+        '': ['templates/*.html', 'templates/*.xml'],
     },
     description='Create static HTML diary from single RST input',
     long_description=long_description,

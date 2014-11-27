@@ -9,7 +9,10 @@
 """
 
 import argparse
-import ConfigParser
+try:
+    import configparser
+except ImportError:
+    import ConfigParser as configparser
 import logging
 import os
 import sys
@@ -184,7 +187,7 @@ def main():
         logging.basicConfig(level=logging.DEBUG)
         logging.debug("Debugging enabled")
 
-    config = ConfigParser.RawConfigParser()
+    config = configparser.RawConfigParser()
     config.read(args.config)
 
     try:
@@ -193,10 +196,10 @@ def main():
                       'author_name', 'site_root']:
             val = config.get('rstdiary', check)
             logging.debug("config: %s=%s" % (check, val))
-    except ConfigParser.NoOptionError:
+    except configparser.NoOptionError:
         sys.stderr.write("Config file doesn't contain: %s\n" % check)
         sys.exit(1)
-    except ConfigParser.NoSectionError:
+    except configparser.NoSectionError:
         sys.stderr.write("Config file doesn't contain section [rstdiary]\n")
         sys.exit(1)
 

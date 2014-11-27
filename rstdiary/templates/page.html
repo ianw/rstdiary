@@ -177,9 +177,22 @@ h6, .h6 {
     </div><!-- /.container -->
 
     <footer class="blog-footer">
-      <p>
-        <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <a href="#">top</a>
-      </p>
+
+        <nav>
+        <ul class="pager">
+
+          {% if previous_month %}
+          <li><a href="{{ previous_month }}.html">&laquo; {{previous_month}}</a></li>
+          {% endif %}
+
+          <li><a href="#"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> top</a></li>
+
+          {% if next_month %}
+          <li><a href="{{ next_month }}.html">{{next_month}} &raquo;</a></li>
+          {% endif %}
+
+        </ul>
+      </nav>
     </footer>
 
   </body>

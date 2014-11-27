@@ -114,8 +114,7 @@ def write_html():
     output_dir = config.get('rstdiary', 'output_dir')
 
     first = True
-    for month in all_months:
-
+    for index, month in enumerate(all_months):
         month_entries = all_entries[month]
         month_entries.sort(key=lambda e: e.date, reverse=True)
 
@@ -125,7 +124,10 @@ def write_html():
                                  about=config.get('rstdiary', 'about'),
                                  month=string_month,
                                  all_months=all_months,
-                                 month_entries=month_entries)
+                                 month_entries=month_entries,
+                                 previous_month=
+                                 all_months[index - 1] if index >= 1 else None,
+                                 next_month=all_months[index + 1] if index < len(all_months)-1 else None)
 
         filename = os.path.join(output_dir, '%s.html' % month)
 

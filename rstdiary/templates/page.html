@@ -153,10 +153,10 @@ h6, .h6 {
 
           <div class="sidebar-module">
             <h4>Weeks</h4>
-            <ol class="list-unstyled">
+            <ul class="list-group">
               {% for entry in month_entries %}
                 {% if entry.start_of_week %}
-              <li><a href="#{{ entry.anchor }}">{{ entry.anchor }}</a></li>
+              <li class="list-group-item"><a href="#{{ entry.anchor }}">{{ entry.anchor }}</a></li>
                 {% endif %}
               {% endfor %}
             </ol>
@@ -165,9 +165,9 @@ h6, .h6 {
           <div class="sidebar-module ">
             <h4><a href="#archives" data-toggle="collapse"  style="color:#333">Archives &raquo;</a></h4>
             <div id="archives" class="collapse">
-              <ol class="list-unstyled">
+              <ul class="list-group">
                 {% for item in all_months %}
-                <li><a href="{{ item }}.html">{{item}}</a></li>
+                <li class="list-group-item"><a href="{{ item }}.html">{{item}}</a></li>
                 {% endfor %}
               </ol>
             </div>

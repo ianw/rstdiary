@@ -37,6 +37,7 @@
 body {
   padding-top: 70px;
   font-family: 'Roboto', san-serif;
+  background: #efefef
 }
 
 h1, .h1,
@@ -61,8 +62,11 @@ h6, .h6 {
 
 /* Sidebar modules for boxing content */
 .sidebar-module {
-  padding: 15px;
-  margin: 0 -15px 15px;
+   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+   background: #fff;
+   padding: 15px;
+   margin: 0 -15px 15px;
+   border-radius: 4px;
 }
 .sidebar-module-inset {
   padding: 15px;
@@ -79,18 +83,17 @@ h6, .h6 {
  * Blog posts
  */
 .blog-post {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 4px;
+    padding: 15px;
+    background: #fff;
 }
 
-.blog-post h2 {
-  padding: 5px;
-  background: #f5f5f5;
-  border-bottom: 1px solid #aaa;
-}
+.blog-post h2 {}
 
 .blog-first h2 {
-  background: #e3f2fd;
-  border-bottom: 1px solid #42a5f5;
+  color: #3f51b5;
 }
 
 /*
@@ -258,43 +261,43 @@ lacus, eget consequat ex sodales id.</p>
 
           <div class="sidebar-module">
             <h4>Weeks</h4>
-            <ol class="list-unstyled">
+            <ul class="list-group">
               
                 
               
                 
-              <li><a href="#2014-11-17">2014-11-17</a></li>
-                
-              
-                
-              
-                
-              
+              <li class="list-group-item"><a href="#2014-11-17">2014-11-17</a></li>
                 
               
                 
               
                 
-              <li><a href="#2014-11-10">2014-11-10</a></li>
+              
+                
+              
+                
+              
+                
+              <li class="list-group-item"><a href="#2014-11-10">2014-11-10</a></li>
                 
               
             </ol>
           </div>
 
           <div class="sidebar-module ">
-            <h4><a href="#" data-toggle="collapse" data-target="#archives" style="color:#333">Archives &raquo;</a></h4>
+            <h4><a href="#archives" data-toggle="collapse"  style="color:#333">Archives &raquo;</a></h4>
             <div id="archives" class="collapse">
-              <ol class="list-unstyled">
+              <ul class="list-group">
                 
-                <li><a href="2014-11.html">2014-11</a></li>
+                <li class="list-group-item"><a href="2014-11.html">2014-11</a></li>
                 
-                <li><a href="2014-10.html">2014-10</a></li>
+                <li class="list-group-item"><a href="2014-10.html">2014-10</a></li>
                 
-                <li><a href="2014-01.html">2014-01</a></li>
+                <li class="list-group-item"><a href="2014-01.html">2014-01</a></li>
                 
-                <li><a href="2013-11.html">2013-11</a></li>
+                <li class="list-group-item"><a href="2013-11.html">2013-11</a></li>
                 
-                <li><a href="2012-01.html">2012-01</a></li>
+                <li class="list-group-item"><a href="2012-01.html">2012-01</a></li>
                 
               </ol>
             </div>
@@ -307,9 +310,20 @@ lacus, eget consequat ex sodales id.</p>
     </div><!-- /.container -->
 
     <footer class="blog-footer">
-      <p>
-        <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> <a href="#">top</a>
-      </p>
+
+        <nav>
+        <ul class="pager">
+
+          
+
+          <li><a href="#"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> top</a></li>
+
+          
+          <li><a href="2014-10.html">2014-10 &raquo;</a></li>
+          
+
+        </ul>
+      </nav>
     </footer>
 
   </body>

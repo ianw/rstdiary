@@ -8,6 +8,8 @@
 
 Fixing bugs in old project
 
+Non-ascii — äöüß ☃
+
 Started `a review <http://review.company.org/1234>`_ to fix broken
 foobobnicator
 

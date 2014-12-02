@@ -9,6 +9,7 @@
 """
 
 import argparse
+import codecs
 try:
     import configparser
 except ImportError:
@@ -74,7 +75,7 @@ class Entry():
 def parse_entries(input_file):
     global all_months, all_entries
 
-    file = open(input_file)
+    file = codecs.open(input_file, 'r', 'utf-8')
     try:
         text = file.read()
     finally:
@@ -145,7 +146,7 @@ def write_html():
             first = False
 
         logging.debug("Writing %s" % filename)
-        with open(filename, 'w') as f:
+        with codecs.open(filename, 'w', 'utf-8') as f:
             f.write(output)
 
 
@@ -169,7 +170,7 @@ def write_atom():
 
     filename = os.path.join(output_dir, 'atom.xml')
     logging.debug("Writing atom feed for %s to %s" % (month, filename))
-    with open(filename, 'w') as f:
+    with codecs.open(filename, 'w', 'utf-8') as f:
         f.write(output)
 
 

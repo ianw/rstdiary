@@ -29,12 +29,12 @@ from docutils.parsers.rst import Parser
 from docutils.writers.html4css1 import HTMLTranslator
 
 from jinja2 import Environment, PackageLoader
-
+import locale
 #
 # globals
 #
 config = None
-
+locale.setlocale(locale.LC_TIME,'')
 # a dict that keeps entries keyed by month.
 # later, we can walk each key kept in all_months
 # to build the pages
@@ -126,7 +126,7 @@ def write_html():
 
         output = template.render(title=config.get('rstdiary', 'title'),
                                  about=config.get('rstdiary', 'about'),
-                                 month=string_month,
+                                 month=unicode(string_month,'utf-8'),
                                  all_months=all_months,
                                  month_entries=month_entries,
                                  previous_month=

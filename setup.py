@@ -9,7 +9,7 @@ The output is chunked into months and lightly styled with bootstrap.
 
 setup(
     name='rstdiary',
-    version='0.7',
+    version='0.8',
     author='Ian Wienand',
     author_email='ian@wienand.org',
     packages=find_packages(),

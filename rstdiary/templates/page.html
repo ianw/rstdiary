@@ -185,11 +185,18 @@ h6, .h6 {
           <div class="sidebar-module ">
             <h4><a href="#archives" data-toggle="collapse"  style="color:#333">Archives &raquo;</a></h4>
             <div id="archives" class="collapse">
-              <ul class="list-group">
-                {% for item in all_months %}
-                <li class="list-group-item"><a href="{{ item }}.html">{{item}}</a></li>
+                {% for year in all_months_by_year.keys() %}
+                <h4><a href="#archives-{{year}}" data-toggle="collapse">{{ year }} &raquo;</a></h4>
+                  <div id="archives-{{year}}" class="collapse">
+                    <ul class="list-group">
+                      {% for month in all_months_by_year[year] %}
+                      <li class="list-group-item">
+                        <a href="{{ year }}-{{ month }}.html">{{ year }}-{{ month }}</a>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
                 {% endfor %}
-              </ul>
             </div>
           </div>
 

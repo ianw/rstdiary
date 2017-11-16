@@ -19,7 +19,7 @@ import os
 import sys
 import re
 
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 from datetime import datetime
 
 import docutils
@@ -53,9 +53,7 @@ class Todo():
         self.body_html = re.sub(r"<h1>.*</h1>", '', body_html)
 
 class Entry():
-
     """Representation of a single day's entry in the RST file"""
-
     def __init__(self, date, body):
         self.date = date
         self.body = body
@@ -135,6 +133,13 @@ def write_html():
     template = env.get_template('page.html')
     output_dir = config.get('rstdiary', 'output_dir')
 
+    # since this is in order, we can bunch them by year to get
+    # an accordian list in the output
+    all_months_by_year = OrderedDict()
+    for month in all_months:
+        y,m = month.split("-")
+        all_months_by_year.setdefault(y, []).append(m)
+
     first = True
     for index, month in enumerate(all_months):
         month_entries = all_entries[month]
@@ -144,11 +149,10 @@ def write_html():
 
         output = template.render(title=config.get('rstdiary', 'title'),
                                  about=config.get('rstdiary', 'about'),
-                                 month=unicode(string_month,'utf-8'),
-                                 all_months=all_months,
+                                 month=unicode(string_month, 'utf-8'),
+                                 all_months_by_year=all_months_by_year,
                                  month_entries=month_entries,
-                                 previous_month=
-                                 all_months[index - 1] if index >= 1 else None,
+                                 previous_month=all_months[index - 1] if index >= 1 else None,
                                  next_month=all_months[index + 1] if index < len(all_months)-1 else None,
                                  todo=todo)
 

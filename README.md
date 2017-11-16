@@ -4,13 +4,24 @@ Transform a flat rst text file into a simple HTML diary
 
 ## input
 
-The input is a single, flat RST file with one section per-day.  The section must be titled with the date in `YYYY-MM-DD` form.  No other sections should be used in the file.
+The input is a single, flat RST file with one section per-day.  The
+section must be titled with the date in `YYYY-MM-DD` form.  There is
+also a special ``todo`` section that will be placed in a collapsed,
+highlighted box on the first page.
 
-Within each section, you can use most RST constructs to style text, create lists or add links
+Within each section, you can use most RST constructs to style text,
+create lists or add links
 
 An example input is
 
 ```rst
+todo
+====
+
+* my
+* todo
+* list
+
 2014-11-18
 ==========
 

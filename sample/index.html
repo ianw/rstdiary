@@ -12,15 +12,15 @@
     <title>Worklog of Me - November 2014</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -98,6 +98,17 @@ h6, .h6 {
 }
 
 /*
+ * todo
+ */
+.todo-entry {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 4px;
+    padding: 15px;
+    background: #F0FFFF;
+}
+
+/*
  * Footer
  */
 
@@ -131,6 +142,28 @@ h6, .h6 {
 
       <div class="row">
         <div class="col-sm-8 blog-main">
+          
+          <div class="todo-entry">
+            <h4><a href="#todo-dropdown" data-toggle="collapse" style="color:#333">todo &raquo;</a></h4>
+            <div id="todo-dropdown" class="collapse">
+              <div class="section" id="todo">
+
+<p>todo is a special section</p>
+<ol class="arabic simple">
+<li>that is always</li>
+<li>at the top, but collapsed</li>
+</ol>
+<p>and has</p>
+<ul class="simple">
+<li>a different colour</li>
+<li>but same shadow</li>
+</ul>
+<p>but is otherwise free form</p>
+</div>
+
+            </div>
+          </div>
+          
           
           <div class="blog-post
              "

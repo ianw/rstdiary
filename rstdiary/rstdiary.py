@@ -44,6 +44,13 @@ all_entries = defaultdict(list)
 # date order (i.e. latest month is first)
 all_months = set()
 
+# the todo list section
+todo = None
+
+class Todo():
+    """The todo list"""
+    def __init__(self, body_html):
+        self.body_html = re.sub(r"<h1>.*</h1>", '', body_html)
 
 class Entry():
 
@@ -73,7 +80,7 @@ class Entry():
 # the month it was created in; each month we see gets an entry in
 # all_months
 def parse_entries(input_file):
-    global all_months, all_entries
+    global all_months, all_entries, todo
 
     file = codecs.open(input_file, 'r', 'utf-8')
     try:
@@ -89,6 +96,17 @@ def parse_entries(input_file):
     parser.parse(text, docroot)
 
     for i in docroot.traverse(condition=docutils.nodes.section):
+        try:
+            if str(i.children[0]) == "<title>todo</title>":
+                logging.debug("Found todo section")
+                translator = HTMLTranslator(docroot)
+                i.walkabout(translator)
+                body = ''.join(translator.body)
+                todo = Todo(body)
+                continue
+        except IndexError:
+            pass
+
         try:
             date_string = re.findall(r'(\d{4}-\d{1,2}-\d{1,2})',
                                      str(i.children[0]))[0]
@@ -131,7 +149,8 @@ def write_html():
                                  month_entries=month_entries,
                                  previous_month=
                                  all_months[index - 1] if index >= 1 else None,
-                                 next_month=all_months[index + 1] if index < len(all_months)-1 else None)
+                                 next_month=all_months[index + 1] if index < len(all_months)-1 else None,
+                                 todo=todo)
 
         filename = os.path.join(output_dir, '%s.html' % month)
 

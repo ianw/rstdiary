@@ -1,3 +1,18 @@
+todo
+====
+
+todo is a special section
+
+#. that is always
+#. at the top, but collapsed
+
+and has
+
+* a different colour
+* but same shadow
+
+but is otherwise free form
+
 2014-11-18
 ==========
 

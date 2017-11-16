@@ -98,6 +98,17 @@ h6, .h6 {
 }
 
 /*
+ * todo
+ */
+.todo-entry {
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 4px;
+    padding: 15px;
+    background: #F0FFFF;
+}
+
+/*
  * Footer
  */
 
@@ -131,6 +142,14 @@ h6, .h6 {
 
       <div class="row">
         <div class="col-sm-8 blog-main">
+          {% if todo %}
+          <div class="todo-entry">
+            <h4><a href="#todo-dropdown" data-toggle="collapse" style="color:#333">todo &raquo;</a></h4>
+            <div id="todo-dropdown" class="collapse">
+              {{ todo.body_html|safe }}
+            </div>
+          </div>
+          {% endif %}
           {% for entry in month_entries %}
           <div class="blog-post
              {% if entry.start_of_week %}

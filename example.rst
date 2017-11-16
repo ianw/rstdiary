@@ -84,7 +84,6 @@ Test old entires
 
 Test out-of-order
 
-
 2014-1-3
 ========
 
@@ -97,6 +96,11 @@ Test missing leading zeros
 Test an old year
 
 * foo `ian <http://foo.com>`_
+
+2012-03-04
+==========
+
+* this is a german unicode month
 
 2012-01-01
 ==========

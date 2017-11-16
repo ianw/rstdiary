@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-long_description="""
+long_description = """
 
 A program to create a simple "daily-diary" from a flat RST file input.
 The output is chunked into months and lightly styled with bootstrap.

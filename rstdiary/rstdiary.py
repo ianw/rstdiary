@@ -24,7 +24,6 @@ from datetime import datetime
 
 import docutils
 from docutils.frontend import OptionParser
-from docutils.utils import new_document
 from docutils.parsers.rst import Parser
 from docutils.writers.html4css1 import HTMLTranslator
 
@@ -34,7 +33,7 @@ import locale
 # globals
 #
 config = None
-locale.setlocale(locale.LC_TIME,'')
+locale.setlocale(locale.LC_TIME, '')
 # a dict that keeps entries keyed by month.
 # later, we can walk each key kept in all_months
 # to build the pages
@@ -47,10 +46,12 @@ all_months = set()
 # the todo list section
 todo = None
 
+
 class Todo():
     """The todo list"""
     def __init__(self, body_html):
         self.body_html = re.sub(r"<h1>.*</h1>", '', body_html)
+
 
 class Entry():
     """Representation of a single day's entry in the RST file"""
@@ -137,7 +138,7 @@ def write_html():
     # an accordian list in the output
     all_months_by_year = OrderedDict()
     for month in all_months:
-        y,m = month.split("-")
+        y, m = month.split("-")
         all_months_by_year.setdefault(y, []).append(m)
 
     first = True
@@ -145,15 +146,21 @@ def write_html():
         month_entries = all_entries[month]
         month_entries.sort(key=lambda e: e.date, reverse=True)
 
-        string_month = datetime.strptime(month, "%Y-%m").strftime("%B %Y")
+        string_month = (datetime.strptime(month, "%Y-%m")
+                        .strftime("%B %Y")
+                        .decode('utf-8'))
+
+        previous_month = all_months[index - 1] if index >= 1 else None
+        next_month = (all_months[index + 1]
+                      if index < len(all_months) - 1 else None)
 
         output = template.render(title=config.get('rstdiary', 'title'),
                                  about=config.get('rstdiary', 'about'),
-                                 month=unicode(string_month, 'utf-8'),
+                                 month=string_month,
                                  all_months_by_year=all_months_by_year,
                                  month_entries=month_entries,
-                                 previous_month=all_months[index - 1] if index >= 1 else None,
-                                 next_month=all_months[index + 1] if index < len(all_months)-1 else None,
+                                 previous_month=previous_month,
+                                 next_month=next_month,
                                  todo=todo)
 
         filename = os.path.join(output_dir, '%s.html' % month)
@@ -227,7 +234,8 @@ def main():
         sys.stderr.write("Config file doesn't contain section [rstdiary]\n")
         sys.exit(1)
 
-    if not os.path.isdir(config.get('rstdiary', 'output_dir')):
+    output_dir = config.get('rstdiary', 'output_dir')
+    if not os.path.isdir(output_dir):
         sys.stderr.write("output_dir <%s>: not a directory\n" % output_dir)
         sys.exit(1)
 
@@ -241,6 +249,7 @@ def main():
 
     write_html()
     write_atom()
+
 
 if __name__ == "__main__":
     main()

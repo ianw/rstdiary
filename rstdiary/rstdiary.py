@@ -13,11 +13,12 @@ import codecs
 import configparser
 import logging
 import os
+import re
 import six
 import sys
-import re
 
-from collections import defaultdict, OrderedDict
+from collections import defaultdict
+from collections import OrderedDict
 from datetime import datetime
 
 import docutils
@@ -25,7 +26,8 @@ from docutils.frontend import OptionParser
 from docutils.parsers.rst import Parser
 from docutils.writers.html4css1 import HTMLTranslator
 
-from jinja2 import Environment, PackageLoader
+from jinja2 import Environment
+from jinja2 import PackageLoader
 import locale
 #
 # globals
@@ -34,13 +36,13 @@ config = None
 locale.setlocale(locale.LC_TIME, '')
 
 
-class Todo():
+class Todo(object):
     """The todo list"""
     def __init__(self, body_html):
         self.body_html = re.sub(r"<h1>.*</h1>", '', body_html)
 
 
-class Entry():
+class Entry(object):
     """Representation of a single day's entry in the RST file"""
     def __init__(self, date, body):
         self.date = date
@@ -62,7 +64,8 @@ class Entry():
 
 
 def parse_entries(input_file):
-    """
+    """Parse entries from input file
+
     Go through the input_file and pull out each section; parse the date
     and create an Entry() object.  Entries go into all_entries keyed by
     the month it was created in; each month we see gets an entry in
@@ -139,8 +142,9 @@ def parse_entries(input_file):
 
 
 def write_html(all_months, all_entries, todo):
-    """
-    Write out HTML pages.  Takes arguments from parse_entries
+    """Write out HTML pages.
+
+    Takes arguments from parse_entries
 
     Arguments:
     :param all_months:
@@ -201,9 +205,10 @@ def write_html(all_months, all_entries, todo):
 
 # a simple atom feed of just the latest month
 def write_atom(all_months, all_entries, todo):
-    """
-    Write out ATOM feed of only the latest month.
-    Takes arguments from parse_entries
+    """Write out ATOM feed
+
+    Only includes the latest month.  Takes arguments from
+    parse_entries.
 
     Arguments:
     :param all_months:

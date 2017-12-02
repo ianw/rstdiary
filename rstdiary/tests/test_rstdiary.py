@@ -29,11 +29,11 @@ class TestRstdiary(testtools.TestCase):
         results = rstdiary.parse_entries('rstdiary/tests/sample/basic.rst')
         fake_config = configparser.ConfigParser()
         fake_config.read_dict({
-                'rstdiary': {
-                        'title': 'test title',
-                        'about': 'test about',
-                        'output_dir': test_dir}
-                })
+            'rstdiary': {
+                'title': 'test title',
+                'about': 'test about',
+                'output_dir': test_dir}
+        })
 
         config_fixture = fixtures.MockPatchObject(rstdiary,
                                                   'config', fake_config)
@@ -41,5 +41,5 @@ class TestRstdiary(testtools.TestCase):
         with config_fixture:
             rstdiary.write_html(**results)
 
-        # TODO: better testing
+        # TODO(ianw): better testing
         self.assertThat(os.path.join(test_dir, 'index.html'), FileExists())

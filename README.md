@@ -1,5 +1,7 @@
 # rstdiary
 
+[![Build Status](https://travis-ci.org/ianw/rstdiary.svg?branch=master)](https://travis-ci.org/ianw/rstdiary)
+
 Transform a flat rst text file into a simple HTML diary
 
 ## input

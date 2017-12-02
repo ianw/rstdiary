@@ -22,7 +22,7 @@ setup(
     entry_points={
         'console_scripts': ['rstdiary = rstdiary.rstdiary:main'],
     },
-    install_requires=['docutils', 'Jinja2>=2.4'],
+    install_requires=['configparser', 'docutils', 'Jinja2>=2.4', 'six'],
     url='https://github.com/ianw/rstdiary',
     classifiers=[
         'Development Status :: 4 - Beta',

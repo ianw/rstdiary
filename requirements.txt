@@ -1,0 +1,4 @@
+jinja2
+docutils
+configparser # backported python3 configparser
+six

@@ -10,12 +10,10 @@
 
 import argparse
 import codecs
-try:
-    import configparser
-except ImportError:
-    import ConfigParser as configparser
+import configparser
 import logging
 import os
+import six
 import sys
 import re
 
@@ -34,17 +32,6 @@ import locale
 #
 config = None
 locale.setlocale(locale.LC_TIME, '')
-# a dict that keeps entries keyed by month.
-# later, we can walk each key kept in all_months
-# to build the pages
-all_entries = defaultdict(list)
-
-# set of keys for all_entries.  sorted by parse_entries into reverse
-# date order (i.e. latest month is first)
-all_months = set()
-
-# the todo list section
-todo = None
 
 
 class Todo():
@@ -74,12 +61,31 @@ class Entry():
         return str(self.date)
 
 
-# go through the input_file and pull out each section; parse the date
-# and create an Entry() object.  Entries go into all_entries keyed by
-# the month it was created in; each month we see gets an entry in
-# all_months
 def parse_entries(input_file):
-    global all_months, all_entries, todo
+    """
+    Go through the input_file and pull out each section; parse the date
+    and create an Entry() object.  Entries go into all_entries keyed by
+    the month it was created in; each month we see gets an entry in
+    all_months
+
+    Returns a dict with three keys:
+
+     - all_entries : dict keyed by month with list of Entry objects
+     - all_months : set of all months in reverse date order
+             (i.e. latest month first)
+     - todo : the todo list section, or None if not available
+    """
+
+    # a dict that keeps entries keyed by month.  later, we can walk
+    # each key kept in all_months to build the pages
+    all_entries = defaultdict(list)
+
+    # set of keys for all_entries.  sorted by parse_entries into
+    # reverse date order (i.e. latest month is first)
+    all_months = set()
+
+    # the todo list section
+    todo = None
 
     file = codecs.open(input_file, 'r', 'utf-8')
     try:
@@ -127,9 +133,21 @@ def parse_entries(input_file):
 
     all_months = sorted(all_months, reverse=True)
 
+    return {'all_months': all_months,
+            'all_entries': all_entries,
+            'todo': todo}
 
-# write out the HTML pages via our template
-def write_html():
+
+def write_html(all_months, all_entries, todo):
+    """
+    Write out HTML pages.  Takes arguments from parse_entries
+
+    Arguments:
+    :param all_months:
+    :param all_entries:
+    :param todo:
+    """
+
     env = Environment(loader=PackageLoader('rstdiary', 'templates'))
     template = env.get_template('page.html')
     output_dir = config.get('rstdiary', 'output_dir')
@@ -146,9 +164,10 @@ def write_html():
         month_entries = all_entries[month]
         month_entries.sort(key=lambda e: e.date, reverse=True)
 
-        string_month = (datetime.strptime(month, "%Y-%m")
-                        .strftime("%B %Y")
-                        .decode('utf-8'))
+        string_month = datetime.strptime(month, "%Y-%m").strftime("%B %Y")
+        if six.PY2:
+            # strftime returns a byte string in python2
+            string_month = string_month.decode(locale.getpreferredencoding())
 
         previous_month = all_months[index - 1] if index >= 1 else None
         next_month = (all_months[index + 1]
@@ -181,7 +200,16 @@ def write_html():
 
 
 # a simple atom feed of just the latest month
-def write_atom():
+def write_atom(all_months, all_entries, todo):
+    """
+    Write out ATOM feed of only the latest month.
+    Takes arguments from parse_entries
+
+    Arguments:
+    :param all_months:
+    :param all_entries:
+    :param todo:
+    """
     env = Environment(loader=PackageLoader('rstdiary', 'templates'))
     template = env.get_template('atom.xml')
     output_dir = config.get('rstdiary', 'output_dir')
@@ -245,10 +273,10 @@ def main():
         sys.stderr.write("Invalid input: %s\n" % input_filename)
         sys.exit(1)
 
-    parse_entries(input_filename)
+    results = parse_entries(input_filename)
 
-    write_html()
-    write_atom()
+    write_html(**results)
+    write_atom(**results)
 
 
 if __name__ == "__main__":

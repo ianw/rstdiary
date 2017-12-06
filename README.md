@@ -4,6 +4,10 @@
 
 Transform a flat rst text file into a simple HTML diary
 
+## install
+
+`pip install rstdiary`
+
 ## input
 
 The input is a single, flat RST file with one section per-day.  The

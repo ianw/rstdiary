@@ -1,0 +1,9 @@
+This is a fairly complete example of keeping a diary
+
+Simply type "make" and a virtualenv with rstdiary is created (if
+required) and the diary output will be created in "output/" and
+trigger the upload rule (which should be modified depending on how you
+publish).
+
+Generally you would only have the Makefile, diary.rst and diary.cfg
+files in a repo.

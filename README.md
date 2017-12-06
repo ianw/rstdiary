@@ -4,7 +4,7 @@
 
 Transform a flat rst text file into a simple HTML diary
 
-## input
+## Input
 
 The input is a single, flat RST file with one section per-day.  The
 section must be titled with the date in `YYYY-MM-DD` form.  There is
@@ -46,7 +46,7 @@ Created git repos for new exciting project
 * `<http://my-git.repo/project-templates.git>`_
 ```
 
-## usage
+## Usage
 
 `rstdiary` takes a single config-file as an argument
 
@@ -62,7 +62,7 @@ site_root = http://foo.com/diary/
 
 All of the above options should be filled out
 
-## output
+## Output
 
 `rstdiary` outputs one HTML page for each month of entries into
 `output_dir`.  `index.html` is symlinked to the most recent month.
@@ -74,3 +74,8 @@ An atom feed of the entries for the latest month only is generated in
 atom.xml
 
 A sample output is [here](https://rawgit.com/ianw/rstdiary/master/sample/index.html)
+
+## Installation
+
+It is recommended to install via ``pip`` in a ``virtualenv``.  For a
+working example, see [example](example/).

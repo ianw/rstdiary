@@ -1,1 +1,1 @@
-include README.md example.cfg example.rst
+include README.md example/diary.rst example/diary.cfg example/Makefile example/README

@@ -10,7 +10,7 @@ The output is chunked into months and lightly styled with bootstrap.
 
 setup(
     name='rstdiary',
-    version='1.0',
+    version='2.0',
     author='Ian Wienand',
     author_email='ian@wienand.org',
     packages=find_packages(),
@@ -23,13 +23,14 @@ setup(
     entry_points={
         'console_scripts': ['rstdiary = rstdiary.rstdiary:main'],
     },
-    install_requires=['configparser', 'docutils', 'Jinja2>=2.4', 'six'],
+    install_requires=['configparser', 'docutils', 'Jinja2>=2.4'],
     url='https://github.com/ianw/rstdiary',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: End Users/Desktop',
         'License :: OSI Approved :: MIT License',
         'Topic :: Office/Business :: News/Diary',
+        'Programming Language :: Python :: 3',
     ]
 
 )

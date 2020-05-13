@@ -14,7 +14,6 @@ import configparser
 import logging
 import os
 import re
-import six
 import sys
 
 from collections import defaultdict
@@ -169,9 +168,6 @@ def write_html(all_months, all_entries, todo):
         month_entries.sort(key=lambda e: e.date, reverse=True)
 
         string_month = datetime.strptime(month, "%Y-%m").strftime("%B %Y")
-        if six.PY2:
-            # strftime returns a byte string in python2
-            string_month = string_month.decode(locale.getpreferredencoding())
 
         previous_month = all_months[index - 1] if index >= 1 else None
         next_month = (all_months[index + 1]

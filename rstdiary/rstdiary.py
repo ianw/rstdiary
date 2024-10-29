@@ -47,10 +47,10 @@ class Entry(object):
         self.date = date
         self.body = body
         # mangle the header to be a bit more readable
-        self.body_html = re.sub(r"<h1>.*</h1>",
-                                r'<h2>%s <small>%s</small></h2>' %
-                                (date.strftime("%d"),
-                                 date.strftime("%A")), self.body)
+        self.body_html = re.sub(r"<h1>.*</h1>", '', self.body)
+        self.title_html = ('<h5 class="card-title">%s</h5><h6 class="card-subtitle text-body-secondary">%s</h6>' %
+                            (date.strftime("%d"),
+                             date.strftime("%A")))
         self.month = "%4d-%02d" % (date.year,
                                    date.month)
         # set to 0 if this is an entry for a monday
